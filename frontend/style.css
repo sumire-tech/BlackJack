@@ -1,0 +1,154 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;700&display=swap');
+
+[v-cloak] {
+  display: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* 黒ベース */
+    color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* コンテナ */
+#app {
+    text-align: center;
+    background: #1e1e1e;
+    padding: 2.5rem 3rem;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    width: 420px;
+    border: 1px solid #2e2e2e;
+}
+
+/* タイトル */
+h2 {
+    color: #f5f5f5;
+    margin-bottom: 1.8rem;
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+/* ステージ選択だけ特別フォント */
+.stages {
+    margin-top: 1rem;
+}
+
+.stages button {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
+}
+
+/* 入力 */
+input {
+    width: 80%;
+    padding: 0.7rem;
+    margin-bottom: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    background: #2a2a2a;
+    color: #f5f5f5;
+    font-size: 1rem;
+    text-align: center;
+    outline: none;
+    border: 1px solid #444;
+}
+
+/* ボタン共通 */
+button {
+    padding: 0.8rem 1.4rem;
+    margin: 0.4rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* 有効ボタン */
+button:not(:disabled) {
+    background: linear-gradient(145deg, #27ae60, #219150); /* グリーン系 */
+    color: #fff;
+}
+
+button:not(:disabled):hover {
+    background: linear-gradient(145deg, #2ecc71, #27ae60);
+    transform: translateY(-2px) scale(1.05);
+}
+
+/* 無効ボタン */
+button:disabled {
+    background: #2a2a2a;
+    color: #777;
+    cursor: not-allowed;
+}
+
+/* メッセージ */
+p {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    color: #bbb;
+}
+
+/*ステージ選択画面*/
+.stage-select-container {
+    position: relative;
+    padding: 20px;
+}
+
+/* ユーザー情報のボタンを小さく */
+.user-info {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    text-align: right;
+}
+.user-info button {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+}
+
+/* JSON出力ボタンを小さめに */
+.export-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.export-button button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+}
+
+/* カード表示 */
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 0.4rem;
+}
+.card {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 60px;
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: #333;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+    border: 1px solid #555;
+}

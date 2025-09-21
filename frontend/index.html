@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>BlackJack</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        /* Vue がマウントされるまで非表示にする */
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- ユーザー登録画面 -->
+        <div v-if="currentPage === 'register'">
+            <h2>ユーザー登録</h2>
+            <input id="username" v-model="username" placeholder="ユーザー名">
+            <button @click="registerUser">登録</button>
+            <p>{{ message }}</p>
+        </div>
+
+        <!-- ステージ選択画面 -->
+        <div v-if="currentPage === 'stageSelect'" class="stage-select-container">
+            <div class="user-info">
+                <p>{{ username }}さん</p>
+                <button @click="deleteUser">ユーザー削除</button>
+            </div>
+
+            <h2>ステージ選択</h2>
+            <div class="stages">
+                <button
+                    v-for="stage in 9"
+                    :key="stage"
+                    :disabled="!stages[stage]"
+                    @click="selectStage(stage)">
+                    {{ stage }} <span v-if="!stages[stage]">🔒</span>
+                </button>
+            </div>
+
+            <div class="export-button">
+                <button @click="exportUserData">結果出力</button>
+            </div>
+        </div>
+
+        <!-- ゲーム画面 -->
+        <div v-if="currentPage === 'game'">
+            <h2>Stage {{ selectedStage }}</h2>
+
+            <div class="dealer">
+                <h3>Dealer <span class="life">{{ '❤️'.repeat(dealerLife) }}</span></h3>
+                <div class="cards">
+                    <span v-for="(card, index) in dealerCards" :key="index" class="card">{{ card }}</span>
+                </div>
+                <p v-if="roundOver">Score: {{ dealerTotal }}</p>
+            </div>
+
+            <div class="player">
+                <h3>{{ username }} <span class="life">{{ '❤️'.repeat(playerLife) }}</span></h3>
+                <div class="cards">
+                    <span v-for="(card, index) in playerCards" :key="index" class="card">{{ card }}</span>
+                </div>
+                <p>Score: {{ playerTotal }}</p>
+            </div>
+
+            <!-- アクションボタン -->
+            <div class="actions">
+                <button @click="hit" :disabled="roundOver || gameOver">Hit</button>
+                <button @click="stand" :disabled="roundOver || gameOver">Stand</button>
+            </div>
+
+            <!-- ラウンド結果 -->
+            <div class="result" v-if="roundOver && !stageCleared && !gameOver">
+                <p>{{ resultMessage }}</p>
+                <button v-if="!gameOver" @click="nextRound">次のラウンド</button>
+            </div>
+
+            <!-- ステージクリア -->
+             <div class="stage-cleared" v-if="stageCleared">
+                <p>{{ resultMessage }}</p>
+                <button @click="backToStageSelect">ステージ選択に戻る</button>
+            </div>
+
+            <!-- ゲームオーバー -->
+            <div class="game-over" v-if="gameOver">
+                <p>GameOver ライフが0になりました。</p>
+                <button @click="backToStageSelect">ステージ選択に戻る</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
